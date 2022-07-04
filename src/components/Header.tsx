@@ -9,6 +9,7 @@ const Header: React.FC = () => {
 
     return (
         <Flex
+            flex={"1 0 100%"}
             justify={"space-between"}
             as="header"
             bg={bg}

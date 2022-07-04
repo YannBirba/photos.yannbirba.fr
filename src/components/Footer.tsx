@@ -5,6 +5,7 @@ const Footer: React.FC = () => {
     const bg = useColorModeValue("white", "gray.700");
     return (
         <Flex
+            flex={"1 0 100%"}
             as="footer"
             h="4rem"
             bg={bg}

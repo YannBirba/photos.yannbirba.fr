@@ -8,7 +8,13 @@ interface MainProps {
 const Main: React.FC<MainProps> = ({ children }) => {
     const bg = useColorModeValue("gray.100", "gray.900");
     return (
-        <Flex bg={bg} minHeight={"calc(100vh - 8rem)"} as="main" padding={"5"}>
+        <Flex
+            flex={"1 0 100%"}
+            bg={bg}
+            minHeight={"calc(100vh - 8rem)"}
+            as="main"
+            padding={"5"}
+        >
             {children}
         </Flex>
     );

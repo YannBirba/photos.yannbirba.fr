@@ -1,12 +1,13 @@
-import http from "../utils/HttpClient";
+import { httpGet } from "../utils/httpCall";
 
 export const getCurrentUser = async () => {
-    return await http
-        .get("user")
-        .then((user) => {
-            return user.data.data;
-        })
-        .catch((error) => {
-            return error.response.data.message ?? error.response.data.error;
-        });
+    return await httpGet("user");
+};
+
+export const getUser = async (id: string) => {
+    return await httpGet(`user/${id}`);
+};
+
+export const getUserList = async () => {
+    return await httpGet("user/userlist");
 };

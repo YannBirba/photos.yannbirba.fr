@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Header from "./components/Header";
@@ -17,16 +17,18 @@ export const App: React.FC = () => {
         <BrowserRouter>
             {/* <AuthProvider> */}
             <ChakraProvider theme={theme}>
-                <Header />
-                <Main>
-                    <QueryClientProvider client={queryClient}>
-                        {process.env.NODE_ENV === "development" && (
-                            <ReactQueryDevtools initialIsOpen={false} />
-                        )}
-                        <AppRoutes />
-                    </QueryClientProvider>
-                </Main>
-                <Footer />
+                <Flex align="stretch" wrap={"wrap"}>
+                    <Header />
+                    <Main>
+                        <QueryClientProvider client={queryClient}>
+                            {process.env.NODE_ENV === "development" && (
+                                <ReactQueryDevtools initialIsOpen={false} />
+                            )}
+                            <AppRoutes />
+                        </QueryClientProvider>
+                    </Main>
+                    <Footer />
+                </Flex>
             </ChakraProvider>
             {/* </AuthProvider> */}
         </BrowserRouter>
