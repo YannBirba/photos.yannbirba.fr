@@ -1,0 +1,28 @@
+{cacheTime: 0} en paramètre si on veut invalider le cache à chaque fois dans le cas d'un formulaire d'update de données
+
+const queryClient = useQueryClient();
+// appeller le queryClient via un hook dans un rfc
+
+est entrain de mettre à jour, a bien mis a jour, reset, lancer la mise à jour
+const {isLoading : isUpdating, isSuccess, reset, mutate} = useMutation(async (e) => {
+    e.preventDefault();
+    const data = {
+        récup les données du form
+    };
+    await la requete(id, data);
+}, {
+    onMutate : async({id, title par ex}) => {
+        await queryClient.cancelQueries(nomDeLaCléDeCache);
+        // pour éviter de faire de la merde pendant qu'on mute les données
+    const previousData = queryClient.setQueryData(nomDeLaCléDeCache);
+                queryClient.setQueryData(nomDeLaCléDeCache,(data) =>{
+            data.map(i => i.id === id ? {...p, title} : i)
+        } )
+        return {previousData}
+    },
+        // on modifie directement les données sans attendre la fin de la requete car dans la plupart du temps c'est ok.
+        onError: (error, _, context) =>{
+            queryClient.setQueryData(nomDeLaCléDeCache, context.previousData);
+            // on set le cache avec les données d'avant dans le cas ou on a une erreur
+        }
+})
