@@ -3,45 +3,51 @@ import type React from "react";
 import { IoMdCheckmarkCircle, IoMdWarning } from "react-icons/io";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
-import http from "../utils/HttpClient";
+import useMutate from "../hooks/useMutate";
+import { login } from "../services/AuthService";
+import { Login } from "../types/User";
 
 const LoginView: React.FC = () => {
     const toast = useToast();
-
+    const queryKey = ["login"];
     const navigate: NavigateFunction = useNavigate();
 
-    const onSubmit = (values: unknown) => {
-        http.post("login", values)
-            .then((response: { data: { message: any } }) => {
-                console.log(response.data);
-                toast({
-                    description: response.data.message,
-                    status: "success",
-                    duration: 2000,
-                    isClosable: true,
-                    position: "top-right",
-                    icon: <IoMdCheckmarkCircle />,
-                    onCloseComplete() {
-                        navigate("/");
-                    },
-                });
-            })
-            .catch((error: { message: any }) => {
-                console.error(error);
-                toast({
-                    description: error.message,
-                    status: "error",
-                    duration: 3000,
-                    isClosable: true,
-                    position: "top-right",
-                    icon: <IoMdWarning />,
-                });
-            });
+    const onError = (error: string) => {
+        toast({
+            description: error,
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top-right",
+            icon: <IoMdWarning />,
+        });
+    };
+    const onSuccess = (message: string) => {
+        toast({
+            description: message,
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+            position: "top-right",
+            icon: <IoMdCheckmarkCircle />,
+        });
+        navigate("/");
+    };
+
+    const { mutateAsync } = useMutate<Login>(
+        queryKey,
+        login,
+        onSuccess,
+        onError,
+    );
+
+    const onSubmit = async (data: Login) => {
+        await mutateAsync(data);
     };
 
     return (
         <Flex justifyContent={"center"} alignItems={"center"} width={"full"}>
-            <LoginForm onSubmit={onSubmit} />
+            <LoginForm submitLogin={onSubmit} />
         </Flex>
     );
 };

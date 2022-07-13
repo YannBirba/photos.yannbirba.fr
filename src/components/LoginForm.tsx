@@ -1,5 +1,5 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import type React from "react";
+import { FieldValues, useForm } from "react-hook-form";
 import {
     FormErrorMessage,
     FormLabel,
@@ -9,12 +9,13 @@ import {
     Box,
     useColorModeValue,
 } from "@chakra-ui/react";
+import { Login } from "../types/User";
 
 interface LoginFormProps {
-    onSubmit: (values: unknown) => void;
+    submitLogin: (login: Login) => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ submitLogin }) => {
     const {
         handleSubmit,
         register,
@@ -22,6 +23,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
     } = useForm();
 
     const bg = useColorModeValue("white", "gray.700");
+
+    const onSubmit = (data: FieldValues) => {
+        submitLogin(data as Login);
+    };
 
     return (
         <Box bg={bg} p={6} rounded="md" w={64}>

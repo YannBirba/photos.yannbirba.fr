@@ -1,8 +1,8 @@
 import { Login, Register } from "../types/User";
-import { httpPost } from "../utils/httpCall";
+import { httpGet, httpPost } from "../utils/httpCall";
 
 export const login = (data: Login) => {
-    return httpPost("login", data);
+    return httpGet("sanctum/csrf-cookie").then(() => httpPost("login", data));
 };
 
 export const register = (data: Register) => {

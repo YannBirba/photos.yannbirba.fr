@@ -1,23 +1,23 @@
 import axios, { type AxiosInstance } from "axios";
 
 const throwEnvError = () => {
-    console.warn("Please define REACT_APP_API_URL in env file");
-    throw new Error("Please define REACT_APP_API_URL in env file");
+    console.warn("Please define VITE_APP_API_URL in env file");
+    throw new Error("Please define VITE_APP_API_URL in env file");
 };
 
 const http: AxiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_API_URL
-        ? process.env.REACT_APP_API_URL
-        : throwEnvError(),
+    baseURL: import.meta.env.VITE_APP_API_URL ?? throwEnvError(),
     withCredentials: true,
     headers: {
         Accept: "application/json",
         AcceptEncoding: "gzip, deflate, br",
     },
+    xsrfCookieName: "XSRF-TOKEN",
 });
 
 http.interceptors.response.use(
     (response: any) => {
+        console.log(response);
         return response;
     },
     (error: {
