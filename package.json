@@ -29,7 +29,6 @@
         "build": "npm run lint:fix && npm run format && tsc && vite build",
         "preview": "vite preview",
         "test": "vitest --dir tests",
-        "test:nowatch": "vitest run --dir tests",
         "coverage": "vitest run --coverage",
         "e2e": "npx playwright test",
         "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
