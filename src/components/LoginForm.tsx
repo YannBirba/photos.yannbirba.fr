@@ -8,6 +8,7 @@ import {
     Button,
     Box,
     useColorModeValue,
+    Checkbox,
 } from "@chakra-ui/react";
 import { Login } from "../types/User";
 
@@ -67,6 +68,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ submitLogin }) => {
                             </p>
                         ) : null}{" "}
                     </FormErrorMessage>
+                </FormControl>
+                <FormControl>
+                    <Checkbox
+                        defaultChecked
+                        id="remember"
+                        {...register("remember", {
+                            // valueAsNumber: true,
+                        })}
+                    >
+                        Se souvenir de moi
+                    </Checkbox>
                 </FormControl>
 
                 <Button
