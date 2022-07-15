@@ -36,7 +36,9 @@
         "constructor-super": "warn",
         "valid-typeof": "warn",
         "no-var": "warn",
-        "no-duplicate-imports": "error",
+        "no-duplicate-imports": "off",
+        "@typescript-eslint/no-duplicate-imports": ["error"],
+
         "camelcase": "off",
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn"

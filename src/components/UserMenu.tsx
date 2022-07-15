@@ -7,13 +7,14 @@ import {
     MenuList,
     useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import type React from "react";
+import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { httpPost } from "../utils/httpCall";
 
 const UserMenu: React.FC = () => {
-    const [isOpen, setIsOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const onOpen = () => setIsOpen(true);
     const onClose = () => setIsOpen(false);
     const toast = useToast();

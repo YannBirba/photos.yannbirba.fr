@@ -17,7 +17,7 @@ const CurrentUserView: React.FC = () => {
     const bg = useColorModeValue("white", "gray.700");
     const { isLoading, isSuccess, isError, isFetching, data, errors, refetch } =
         useGet(getCurrentUser());
-    const currentUser: User = data || ({} as User);
+    const currentUser: User = data.data || ({} as User);
 
     return (
         <>

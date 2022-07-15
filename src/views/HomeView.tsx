@@ -1,5 +1,6 @@
 import { Button } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import http from "../utils/HttpClient";
 
 const HomeView: React.FC = () => {
@@ -12,7 +13,7 @@ const HomeView: React.FC = () => {
         http.get("api/user")
             .then((data) => {
                 setIsLoading(false);
-                setData(data);
+                setData(data.data);
             })
             .catch((error) => {
                 setIsLoading(false);
